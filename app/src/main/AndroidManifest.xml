@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BMI_App">
-        <activity android:name=".comSignUpActivity"></activity>
+        <activity
+            android:name=".newRecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".homeActivity"
+            android:exported="false" />
+        <activity android:name=".comSignUpActivity" />
         <activity android:name=".signUpActivity" />
         <activity android:name=".loginActivity" />
         <activity android:name=".splashActivity">

@@ -73,6 +73,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12sp"
                     android:layout_marginRight="12sp"
+                    android:buttonTint="@color/purple_500"
+                    android:checked="true"
                     android:text="Male"
                     android:textColor="@color/purple_500"
                     android:textSize="16sp" />
@@ -82,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12sp"
                     android:layout_marginRight="12sp"
+                    android:buttonTint="@color/purple_500"
                     android:text="Female"
                     android:textColor="@color/purple_500"
                     android:textSize="16sp" />
@@ -246,6 +249,7 @@
             android:layout_marginRight="20sp"
             android:background="@drawable/bg_et"
             android:text="Save Data"
+            android:textAllCaps="false"
             android:textColor="#FFF"
             android:textSize="16sp" />
 
@@ -254,3 +258,5 @@
 
 
 </LinearLayout>
+
+
