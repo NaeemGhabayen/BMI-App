@@ -1,9 +1,11 @@
-package com.nmg.bmi_app;
+package com.nmg.bmi_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.nmg.bmi_app.R;
 
 public class splashActivity extends AppCompatActivity {
 

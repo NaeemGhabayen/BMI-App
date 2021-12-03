@@ -1,14 +1,16 @@
-package com.nmg.bmi_app;
+package com.nmg.bmi_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class comSignUpActivity extends AppCompatActivity {
+import com.nmg.bmi_app.R;
+
+public class newRecordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_com_sign_up);
+        setContentView(R.layout.activity_new_record);
     }
 }

@@ -10,15 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMI_App">
         <activity
-            android:name=".newRecordActivity"
+            android:name=".ui.listOfFoodActivity"
             android:exported="false" />
         <activity
-            android:name=".homeActivity"
+            android:name=".ui.addFoodActivity"
             android:exported="false" />
-        <activity android:name=".comSignUpActivity" />
-        <activity android:name=".signUpActivity" />
-        <activity android:name=".loginActivity" />
-        <activity android:name=".splashActivity">
+        <activity
+            android:name=".ui.newRecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.homeActivity"
+            android:exported="false" />
+        <activity android:name=".ui.comSignUpActivity" />
+        <activity android:name=".ui.signUpActivity" />
+        <activity android:name=".ui.loginActivity" />
+        <activity android:name=".ui.splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".comSignUpActivity">
+    tools:context=".ui.comSignUpActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -95,7 +95,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_addNewRecord"
+                    android:id="@+id/btn_addFood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -104,11 +104,13 @@
                     android:background="@drawable/bg_et"
                     android:textAllCaps="false"
                     android:padding="16dp"
-                    android:text="Add Record"
+                    android:text="Add Food"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_addNewRecord"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -117,7 +119,7 @@
                     android:textAllCaps="false"
                     android:background="@drawable/bg_et"
                     android:padding="16dp"
-                    android:text="Save Data"
+                    android:text="Add Record"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
