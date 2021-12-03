@@ -29,8 +29,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -51,23 +51,27 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16sp"
-            android:padding="12sp"
+            android:hint="userName"
             android:inputType="textEmailAddress"
-            android:hint="userName" />
+            android:padding="12sp" />
 
         <EditText
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16sp"
             android:layout_marginRight="16sp"
-            android:padding="12sp"
+            android:hint="password"
             android:inputType="textPassword"
-            android:hint="password" />
+            android:padding="12sp" />
+
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
@@ -77,7 +81,6 @@
             android:text="Login"
             android:textColor="#FFF"
             android:textSize="16sp" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,6 +106,13 @@
                 android:textColor="@color/purple_500"
                 android:textSize="16sp" />
         </LinearLayout>
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
 
 

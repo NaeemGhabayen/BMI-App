@@ -64,11 +64,13 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/rb_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12sp"
@@ -80,6 +82,7 @@
                     android:textSize="16sp" />
 
                 <RadioButton
+                    android:id="@+id/rb_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12sp"
@@ -110,6 +113,7 @@
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_minWeight"
                 android:layout_width="20sp"
                 android:layout_height="20sp"
                 android:layout_gravity="center"
@@ -122,6 +126,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/et_weight"
                 android:layout_width="80dp"
                 android:layout_height="20dp"
                 android:background="@drawable/bg_conter"
@@ -131,6 +136,7 @@
                 android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_maxWeight"
                 android:layout_width="20sp"
                 android:layout_height="20sp"
                 android:layout_gravity="center"
@@ -163,13 +169,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20dp"
-
                 android:text="Length"
                 android:textColor="@color/purple_500"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_minLenght"
                 android:layout_width="20sp"
                 android:layout_height="20sp"
                 android:layout_gravity="center"
@@ -182,6 +188,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/et_lenght"
                 android:layout_width="80dp"
                 android:layout_height="20dp"
                 android:background="@drawable/bg_conter"
@@ -191,6 +198,8 @@
                 android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_maxLenght"
+
                 android:layout_width="20sp"
                 android:layout_height="20sp"
                 android:layout_gravity="center"
@@ -230,6 +239,7 @@
 
 
             <EditText
+                android:id="@+id/et_birthday"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12sp"
@@ -242,6 +252,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_saveData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
