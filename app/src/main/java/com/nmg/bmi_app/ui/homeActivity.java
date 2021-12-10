@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class homeActivity extends AppCompatActivity {
-    Button btn_addNewRecord, btn_saveData, btn_addFood;
+    Button btn_addNewRecord, btn_viewFood, btn_addFood;
     TextView tv_logout, tv_status, tv_name;
     FirebaseAuth auth;
     FirebaseFirestore fStore;
@@ -45,7 +45,7 @@ public class homeActivity extends AppCompatActivity {
         tv_logout = findViewById(R.id.tv_logout);
         rv_status = findViewById(R.id.rv_status);
 
-        btn_saveData = findViewById(R.id.btn_saveData);
+        btn_viewFood = findViewById(R.id.btn_viewFood);
         btn_addFood = findViewById(R.id.btn_addFood);
         tv_status = findViewById(R.id.tv_status);
         tv_name = findViewById(R.id.tv_name);
@@ -54,7 +54,12 @@ public class homeActivity extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         userId = auth.getUid();
         showData();
-
+        btn_viewFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),listOfFoodActivity.class));
+            }
+        });
         btn_addFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,8 +115,6 @@ public class homeActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 
     private void getDataFromFirebase() {

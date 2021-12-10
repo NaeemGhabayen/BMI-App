@@ -8,20 +8,29 @@ public class Food {
     String name;
     String fireUri;
     String category;
-
+    String documentId;
     public Food() {
     }
 
-    public Food(String userId, String calary, String name, String fireUri, String category) {
+    public Food(String userId, String calary, String name, String fireUri, String category,String documentId) {
         this.userId = userId;
         this.calary = calary;
         this.name = name;
         this.fireUri = fireUri;
         this.category = category;
+        this.documentId= documentId;
     }
 
     public String getFireUri() {
         return fireUri;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public void setFireUri(String fireUri) {
