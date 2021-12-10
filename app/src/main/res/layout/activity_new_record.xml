@@ -57,6 +57,7 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_minWeight"
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:layout_gravity="center"
@@ -69,6 +70,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/et_weight"
             android:layout_width="80dp"
             android:layout_height="20dp"
             android:background="@drawable/bg_conter"
@@ -78,6 +80,7 @@
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_maxWeight"
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:layout_gravity="center"
@@ -117,6 +120,7 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_minLenght"
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:layout_gravity="center"
@@ -129,6 +133,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/et_lenght"
             android:layout_width="80dp"
             android:layout_height="20dp"
             android:background="@drawable/bg_conter"
@@ -138,6 +143,7 @@
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_maxLenght"
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:layout_gravity="center"
@@ -177,6 +183,7 @@
 
 
         <EditText
+            android:id="@+id/et_date"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="34dp"
@@ -209,6 +216,7 @@
 
 
         <EditText
+            android:id="@+id/et_time"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
@@ -221,6 +229,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_saveData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20sp"
