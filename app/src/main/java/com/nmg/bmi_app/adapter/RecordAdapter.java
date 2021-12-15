@@ -19,7 +19,6 @@ import java.util.List;
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolderTrind> {
     private Context context;
     private List<Record> records;
-    private static ClickListener clickListener;
 
     public RecordAdapter(Context context, List<Record> results) {
         this.context = context;
@@ -38,7 +37,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolderTrind holder, int position) {
         holder.tv_lenght.setText(records.get(position).getLenght());
-//        holder.tv_status.setText(records.get(position).get());
+       holder.tv_status.setText(records.get(position).getStutes());
         holder.tv_wieght.setText(records.get(position).getWieght());
         holder.tv_date.setText(records.get(position).getDate());
     }
@@ -71,23 +70,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             tv_wieght = itemView.findViewById(R.id.tv_wieght);
             tv_date = itemView.findViewById(R.id.tv_date);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickListener.onClick(records.get(getAdapterPosition()));
-                }
-            });
+
         }
 
     }
 
-    public void OnItemCliclkLisener(ClickListener clickListener1) {
-        clickListener = clickListener1;
-    }
 
-    public interface ClickListener {
-        void onClick(Record result);
-    }
 
 }
 

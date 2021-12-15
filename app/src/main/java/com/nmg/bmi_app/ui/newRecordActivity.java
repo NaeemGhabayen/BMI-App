@@ -125,6 +125,7 @@ public class newRecordActivity extends AppCompatActivity {
                             et_time.setText("");
                             et_lenght.setText("");
                             et_weight.setText("");
+                            startActivity(new Intent(getApplicationContext(),homeActivity.class));
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
