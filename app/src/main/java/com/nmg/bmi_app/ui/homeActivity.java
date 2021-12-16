@@ -31,7 +31,7 @@ import java.util.List;
 
 public class homeActivity extends AppCompatActivity {
     Button btn_addNewRecord, btn_viewFood, btn_addFood;
-    TextView tv_logout, tv_status, tv_name;
+    TextView tv_logout, tv_status, tv_name,tv_load;
     FirebaseAuth auth;
     FirebaseFirestore fStore;
     String userId;
@@ -47,7 +47,7 @@ public class homeActivity extends AppCompatActivity {
     double weightLastIndex, weightTowLastIndex, lengthLastIndex, bmiChange, bmiLastIndex, bmiTowLastIndex;
     Calendar today;
     int age, year;
-
+    String userWeight, userLenght,birthday;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +55,7 @@ public class homeActivity extends AppCompatActivity {
         btn_addNewRecord = findViewById(R.id.btn_addNewRecord);
         tv_logout = findViewById(R.id.tv_logout);
         rv_status = findViewById(R.id.rv_status);
-
+        tv_load= findViewById(R.id.tv_load);
         btn_viewFood = findViewById(R.id.btn_viewFood);
         btn_addFood = findViewById(R.id.btn_addFood);
         tv_status = findViewById(R.id.tv_status);
@@ -111,7 +111,6 @@ public class homeActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Toast.makeText(getApplicationContext(), "rssssssss", Toast.LENGTH_SHORT).show();
                                 String date = document.getData().get("date").toString();
                                 String lenght = document.getData().get("lenght").toString();
                                 String wieght = document.getData().get("wieght").toString();
@@ -119,7 +118,7 @@ public class homeActivity extends AppCompatActivity {
                                 Log.d("TAG", "onComplete: " + date);
 
                                 //  dob.set(year, month, day);
-                                year = Integer.parseInt(date.substring(6));
+                                year = Integer.parseInt(date.substring(7));
                                 age = today.get(Calendar.YEAR) - year;
                                 Log.d("TAG", "onCompletse: " + year);
                                 Log.d("TAG", "onCompletse: " + today.get(Calendar.YEAR));
@@ -142,7 +141,6 @@ public class homeActivity extends AppCompatActivity {
                                     bmi = (weight / length) * ageParcent;
                                 }
                                 //calc bmi
-
                                 Log.e("TAGApoi", "onComplete: ageParcent " + ageParcent);
                                 Log.e("TAGApoi", "bmi:weight " + weight);
                                 Log.e("TAGApoi", "bmi:length " + length);
@@ -163,94 +161,34 @@ public class homeActivity extends AppCompatActivity {
                             }
                             Log.e("TAGApoi", "onComplete: " + records.size());
                             Collections.reverse(records);
+                             if (records.size() < 1) {
+                                 tv_load.setVisibility(View.VISIBLE);
+                                 setDataForStutes(birthday  , userWeight ,userLenght ,gender);
+                            }else if (records.size()==1) {
+                                 bmiLastIndex = records.get(0).getBmi();
+                                 year = Integer.parseInt(birthday.substring(7).toString());
+                                 age = today.get(Calendar.YEAR) -year ;
+                                 weight = Double.parseDouble(userWeight);
+                                 length = Double.parseDouble(userLenght) / 100 * Double.parseDouble(userLenght) / 100;
+                                 if (age >= 20) {
+                                     ageParcent = 1;
+                                     bmi = (weight / length) * ageParcent;
+                                 } else if ((age >= 10 && age <= 19) && gender.equals("Male")) {
+                                     ageParcent = 0.90;
+                                     bmi = (weight / length) * ageParcent;
+                                 } else if ((age >= 10 && age <= 19) && gender.equals("Female")) {
+                                     ageParcent = 0.80;
+                                     bmi = (weight / length) * ageParcent;
+                                 } else if (age >= 2 && age <= 10) {
+                                     ageParcent = 0.7;
+                                     bmi = (weight / length) * ageParcent;
+                                 }
+                                 ShowMsgForTowRecord(bmiLastIndex,bmi,records.get(0).getStutes());
 
-                            if (records.size() < 1) {
-                                Toast.makeText(getApplicationContext(), "kos ", Toast.LENGTH_SHORT).show();
-                            } else {
-                                bmiLastIndex = records.get(0).getBmi();
-                                bmiTowLastIndex = records.get(1).getBmi();
-
-                                Log.e("bmiLastIndex", "onComplete: " + bmiLastIndex);
-                                Log.e("bmiTowLastIndex", "onComplete: " + bmiTowLastIndex);
-
-                                bmiChange = bmiLastIndex -bmiTowLastIndex;
-                                Log.e("bmiChange", "onComplete: " + bmiChange);
-                                String stuts = records.get(0).getStutes();
-
-                                switch (records.get(0).getStutes()){
-                                    case "Obesity":
-                                        Toast.makeText(getApplicationContext(), "Obesity", Toast.LENGTH_SHORT).show();
-                                        if ((bmiChange<-1)||(bmiChange>=-1 && bmiChange<-0.6)){
-                                            tv_status.setText(stuts+" Go Ahead");
-                                            Log.e("tv_status", "onComplete: " + "Go Ahead"+ bmiChange);
-                                        }else if((bmiChange<-0.3  && bmiChange>=-0.6)||(bmiChange>=-0.3&&bmiChange>0)){
-                                            tv_status.setText(stuts+" Little Changes");
-                                            Log.e("tv_status", "onComplete: " + "Little Changes"+ bmiChange);
-                                        }else if (bmiChange>=0 && bmiChange<0.3){
-                                            tv_status.setText(stuts+" Be Careful");
-                                            Log.e("tv_status", "onComplete: " + " Be Careful"+ bmiChange);
-                                        }else if ((bmiChange>=0.3 && bmiChange<0.6)||(bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
-                                            tv_status.setText(stuts+" So Bad");
-                                            Log.e("tv_status", "onComplete: " + "So Bad"+ bmiChange);
-                                        }
-                                        break;
-
-                                    case "Overweight":
-                                        Toast.makeText(getApplicationContext(), "Overweight", Toast.LENGTH_SHORT).show();
-                                        if ((bmiChange<-1)||(bmiChange>=0.3 && bmiChange<0.6)){
-                                            tv_status.setText(stuts+" Be Careful");
-                                            Log.e("tv_status", "onComplete: " + "Be Careful"+ bmiChange);
-                                        }else if((bmiChange>=-1 && bmiChange<-0.6)){
-                                            tv_status.setText(stuts+" Go Ahead");
-                                            Log.e("tv_status", "onComplete: " + "Go Ahead"+ bmiChange);
-                                        }else if ((bmiChange<-0.3  && bmiChange>=-0.6)){
-                                        tv_status.setText(stuts+" still good");
-                                        Log.e("tv_status", "onComplete: " + "Go still"+ bmiChange);
-                                        }else if ((bmiChange>=-0.3&&bmiChange<0)||(bmiChange>=0 && bmiChange<0.3)){
-                                            tv_status.setText(stuts+" Little Changes");
-                                            Log.e("tv_status", "onComplete: " + " Be Little Changes "+ bmiChange);
-                                        }else if ((bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
-                                            tv_status.setText(stuts+" So Bad");
-                                            Log.e("tv_status", "onComplete: " + "So Bad"+ bmiChange);
-                                        }
-                                        break;
-
-                                    case "Healthy Weight":
-                                        Toast.makeText(getApplicationContext(), "Healthy Weight", Toast.LENGTH_SHORT).show();
-                                        if ((bmiChange<-1)){
-                                            tv_status.setText(stuts+" So Bad");
-                                            Log.e("tv_status", "onComplete: " + "So Bad"+ bmiChange);
-                                        }else if((bmiChange>=-1 && bmiChange<-0.6)||(bmiChange<-0.3  && bmiChange>=-0.6)||
-                                                (bmiChange>=0.3 && bmiChange<0.6)||(bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
-                                            tv_status.setText(stuts+" Be Careful");
-                                            Log.e("tv_status", "onComplete: " + "Go Careful"+ bmiChange);
-                                        }else if ((bmiChange>=-0.3&&bmiChange<0)||(bmiChange>=0 && bmiChange<0.3)){
-                                            tv_status.setText(stuts+" Little Changes");
-                                            Log.e("tv_status", "onComplete: " + " Be Little Changes "+ bmiChange);
-                                        }
-                                        break;
-
-
-                                    case "Underweight":
-                                        Toast.makeText(getApplicationContext(), "Underweight", Toast.LENGTH_SHORT).show();
-                                        if ((bmiChange<-1)||(bmiChange>=-1 && bmiChange<-0.6)||
-                                                (bmiChange<-0.3  && bmiChange>=-0.6)) {
-                                            tv_status.setText(stuts+" So Bad");
-                                            Log.e("tv_status", "onComplete: " + "So Bad");
-                                        }else if ((bmiChange>=-0.3&&bmiChange<0)||(bmiChange>=0 && bmiChange<0.3)){
-                                            tv_status.setText(stuts+" Little Changes");
-                                            Log.e("tv_status", "onComplete: " + " Be Little Changes ");
-                                        }else if ((bmiChange>=0.3 && bmiChange<0.6)){
-                                            tv_status.setText(stuts+" Still Good");
-                                            Log.e("tv_status", "onComplete: " + " Still Good");
-                                        }else if((bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
-                                            tv_status.setText(stuts+" Go Ahead");
-                                            Log.e("tv_status", "onComplete: " + "Go Ahead");
-                                        }
-                                        break;
-                                }
-
-
+                             }else{
+                                 bmiLastIndex = records.get(0).getBmi();
+                                 bmiTowLastIndex = records.get(1).getBmi();
+                                 ShowMsgForTowRecord(bmiLastIndex,bmiTowLastIndex,records.get(0).getStutes());
 
                             }
                             adapter = new RecordAdapter(getApplicationContext(), records);
@@ -265,6 +203,125 @@ public class homeActivity extends AppCompatActivity {
                 });
     }
 
+    private void ShowMsgForTowRecord(double bmiLastIndex, double bmiTowLastIndex, String stutes) {
+
+        Log.e("bmiLastIndex", "onComplete: " + bmiLastIndex);
+        Log.e("bmiTowLastIndex", "onComplete: " + bmiTowLastIndex);
+
+        bmiChange = bmiLastIndex -bmiTowLastIndex;
+        Log.e("bmiChange", "onComplete: " + bmiChange);
+        String stuts = records.get(0).getStutes();
+
+        switch (stutes){
+            case "Obesity":
+                if ((bmiChange<-1)||(bmiChange>=-1 && bmiChange<-0.6)){
+                    tv_status.setText(stuts+" Go Ahead");
+                    Log.e("tv_status", "onComplete: " + "Go Ahead"+ bmiChange);
+                }else if((bmiChange<-0.3  && bmiChange>=-0.6)||(bmiChange>=-0.3&&bmiChange>0)){
+                    tv_status.setText(stuts+" Little Changes");
+                    Log.e("tv_status", "onComplete: " + "Little Changes"+ bmiChange);
+                }else if (bmiChange>=0 && bmiChange<0.3){
+                    tv_status.setText(stuts+" Be Careful");
+                    Log.e("tv_status", "onComplete: " + " Be Careful"+ bmiChange);
+                }else if ((bmiChange>=0.3 && bmiChange<0.6)||(bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
+                    tv_status.setText(stuts+" So Bad");
+                    Log.e("tv_status", "onComplete: " + "So Bad"+ bmiChange);
+                }
+                break;
+
+            case "Overweight":
+                if ((bmiChange<-1)||(bmiChange>=0.3 && bmiChange<0.6)){
+                    tv_status.setText(stuts+" Be Careful");
+                    Log.e("tv_status", "onComplete: " + "Be Careful"+ bmiChange);
+                }else if((bmiChange>=-1 && bmiChange<-0.6)){
+                    tv_status.setText(stuts+" Go Ahead");
+                    Log.e("tv_status", "onComplete: " + "Go Ahead"+ bmiChange);
+                }else if ((bmiChange<-0.3  && bmiChange>=-0.6)){
+                    tv_status.setText(stuts+" still good");
+                    Log.e("tv_status", "onComplete: " + "Go still"+ bmiChange);
+                }else if ((bmiChange>=-0.3&&bmiChange<0)||(bmiChange>=0 && bmiChange<0.3)){
+                    tv_status.setText(stuts+" Little Changes");
+                    Log.e("tv_status", "onComplete: " + " Be Little Changes "+ bmiChange);
+                }else if ((bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
+                    tv_status.setText(stuts+" So Bad");
+                    Log.e("tv_status", "onComplete: " + "So Bad"+ bmiChange);
+                }
+                break;
+
+            case "Healthy Weight":
+                if ((bmiChange<-1)){
+                    tv_status.setText(stuts+" So Bad");
+                    Log.e("tv_status", "onComplete: " + "So Bad"+ bmiChange);
+                }else if((bmiChange>=-1 && bmiChange<-0.6)||(bmiChange<-0.3  && bmiChange>=-0.6)||
+                        (bmiChange>=0.3 && bmiChange<0.6)||(bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
+                    tv_status.setText(stuts+" Be Careful");
+                    Log.e("tv_status", "onComplete: " + "Go Careful"+ bmiChange);
+                }else if ((bmiChange>=-0.3&&bmiChange<0)||(bmiChange>=0 && bmiChange<0.3)){
+                    tv_status.setText(stuts+" Little Changes");
+                    Log.e("tv_status", "onComplete: " + " Be Little Changes "+ bmiChange);
+                }
+                break;
+
+
+            case "Underweight":
+                if ((bmiChange<-1)||(bmiChange>=-1 && bmiChange<-0.6)||
+                        (bmiChange<-0.3  && bmiChange>=-0.6)) {
+                    tv_status.setText(stuts+" So Bad");
+                    Log.e("tv_status", "onComplete: " + "So Bad");
+                }else if ((bmiChange>=-0.3&&bmiChange<0)||(bmiChange>=0 && bmiChange<0.3)){
+                    tv_status.setText(stuts+" Little Changes");
+                    Log.e("tv_status", "onComplete: " + " Be Little Changes ");
+                }else if ((bmiChange>=0.3 && bmiChange<0.6)){
+                    tv_status.setText(stuts+" Still Good");
+                    Log.e("tv_status", "onComplete: " + " Still Good");
+                }else if((bmiChange>=0.6 && bmiChange<1)||bmiChange>=1){
+                    tv_status.setText(stuts+" Go Ahead");
+                    Log.e("tv_status", "onComplete: " + "Go Ahead");
+                }
+                break;
+        }
+    }
+
+    private void setDataForStutes(String birthday, String userWeight, String userLenght, String gender) {
+        year = Integer.parseInt(birthday.substring(7));
+        age = today.get(Calendar.YEAR) -year ;
+        weight = Double.parseDouble(userWeight);
+        length = Double.parseDouble(userLenght) / 100 * Double.parseDouble(userLenght) / 100;
+        if (age >= 20) {
+            ageParcent = 1;
+            bmi = (weight / length) * ageParcent;
+        } else if ((age >= 10 && age <= 19) && gender.equals("Male")) {
+            ageParcent = 0.90;
+            bmi = (weight / length) * ageParcent;
+        } else if ((age >= 10 && age <= 19) && gender.equals("Female")) {
+            ageParcent = 0.80;
+            bmi = (weight / length) * ageParcent;
+        } else if (age >= 2 && age <= 10) {
+            ageParcent = 0.7;
+            bmi = (weight / length) * ageParcent;
+        }
+        //calc bmi
+        Log.e("TAGApoi", "onComplete: ageParcent " + ageParcent);
+        Log.e("TAGApoi", "bmi:weight " + weight);
+        Log.e("TAGApoi", "bmi:length " + length);
+        Log.e("TAGApoi", "bmi:bmi " + bmi);
+
+        if (bmi > 30) {
+            stutas = "Obesity";
+        } else if (bmi <= 30 && bmi > 25) {
+            stutas = "Overweight";
+        } else if (bmi <= 25 && bmi > 18.5) {
+            stutas = "Healthy Weight";
+
+        } else if (bmi <= 18.5) {
+            stutas = "Underweight";
+        }
+
+        tv_status.setText(stutas);
+        Toast.makeText(getApplicationContext(), "kdos ", Toast.LENGTH_SHORT).show();
+
+    }
+
     private void getDataFromFirebase() {
         fStore.collection("users").document(userId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -273,6 +330,9 @@ public class homeActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             String name = task.getResult().get("userName").toString();
                             gender = task.getResult().get("gender").toString();
+                            userWeight= task.getResult().get("weight").toString();
+                            userLenght= task.getResult().get("lenght").toString();
+                            birthday= task.getResult().get("birthday").toString();
 
                             tv_name.setText(name);
                         }

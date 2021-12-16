@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -59,7 +58,6 @@ public class listOfFoodActivity extends AppCompatActivity {
                                 rv_foods.setVisibility(View.VISIBLE);
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Toast.makeText(getApplicationContext(), "rssssssss", Toast.LENGTH_SHORT).show();
                                 String nameFood = document.getData().get("name").toString();
                                 String calary = document.getData().get("calary").toString();
                                 String fireUri = document.getData().get("fireUri").toString();

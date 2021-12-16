@@ -83,7 +83,16 @@
                 android:layout_margin="20dp"
                 android:background="@drawable/bg_et"
                 android:orientation="vertical">
-
+            <TextView
+                android:id="@+id/tv_load"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:text="لا يوجد اضافات سابقة"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_status"
                     android:layout_width="match_parent"

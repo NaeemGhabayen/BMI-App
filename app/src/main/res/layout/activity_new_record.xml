@@ -58,8 +58,8 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_minWeight"
-            android:layout_width="20sp"
-            android:layout_height="20sp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="16sp"
             android:background="@drawable/bg_conter"
@@ -72,17 +72,18 @@
         <EditText
             android:id="@+id/et_weight"
             android:layout_width="80dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:background="@drawable/bg_conter"
             android:gravity="center"
-            android:text="0"
+            android:inputType="number"
+            android:text="40"
             android:textColor="@color/purple_500"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_maxWeight"
-            android:layout_width="20sp"
-            android:layout_height="20sp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@drawable/bg_conter"
             android:gravity="center"
@@ -95,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:text="lg"
+            android:text="kg"
             android:textColor="@color/purple_500" />
     </LinearLayout>
 
@@ -121,8 +122,8 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_minLenght"
-            android:layout_width="20sp"
-            android:layout_height="20sp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="16sp"
             android:background="@drawable/bg_conter"
@@ -135,17 +136,18 @@
         <EditText
             android:id="@+id/et_lenght"
             android:layout_width="80dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:background="@drawable/bg_conter"
+            android:inputType="number"
             android:gravity="center"
-            android:text="0"
+            android:text="100"
             android:textColor="@color/purple_500"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_maxLenght"
-            android:layout_width="20sp"
-            android:layout_height="20sp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@drawable/bg_conter"
             android:gravity="center"
@@ -182,10 +184,10 @@
             android:textStyle="bold" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/et_date"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_width="145dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="34dp"
             android:background="@drawable/bg_conter"
             android:gravity="center"
@@ -215,10 +217,10 @@
             android:textStyle="bold" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/et_time"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_width="145dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="32dp"
             android:background="@drawable/bg_conter"
             android:gravity="center"

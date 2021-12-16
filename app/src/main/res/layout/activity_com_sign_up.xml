@@ -131,7 +131,8 @@
                 android:layout_height="20dp"
                 android:background="@drawable/bg_conter"
                 android:gravity="center"
-                android:text="0"
+                android:text="40"
+                android:inputType="number"
                 android:textColor="@color/purple_500"
                 android:textSize="16sp" />
 
@@ -151,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:text="lg"
+                android:text="kg"
                 android:textColor="@color/purple_500" />
         </LinearLayout>
 
@@ -193,7 +194,8 @@
                 android:layout_height="20dp"
                 android:background="@drawable/bg_conter"
                 android:gravity="center"
-                android:text="0"
+                android:text="100"
+                android:inputType="number"
                 android:textColor="@color/purple_500"
                 android:textSize="16sp" />
 
@@ -238,11 +240,10 @@
                 android:textStyle="bold" />
 
 
-            <EditText
+            <TextView
                 android:id="@+id/et_birthday"
-                android:layout_width="140dp"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12sp"
                 android:background="@drawable/bg_conter"
                 android:gravity="center"
                 android:textColor="@color/purple_500"

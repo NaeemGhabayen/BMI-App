@@ -3,15 +3,19 @@ package com.nmg.bmi_app.ui;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,19 +26,24 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.nmg.bmi_app.R;
+import com.nmg.bmi_app.service.DatePickerFragment;
+import com.nmg.bmi_app.service.TimePickerFragment;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class comSignUpActivity extends AppCompatActivity {
+public class comSignUpActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     Button btn_maxLenght, btn_minLenght, btn_minWeight, btn_maxWeight, btn_saveData;
-    EditText et_birthday, et_lenght, et_weight;
+    EditText  et_lenght, et_weight;
     RadioGroup radioGroup;
     Intent intent;
     String userId;
+    TextView et_birthday;
     RadioButton rb_gender;
     FirebaseFirestore firestore;
-    int countLenght, countWeight;
+    int countLenght=100, countWeight=40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +78,19 @@ public class comSignUpActivity extends AppCompatActivity {
             }
         });
 
+        et_birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+
+
         btn_minWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(et_weight.getText().toString().equals("0")){
+               if(et_weight.getText().toString().equals("40")){
                    Toast.makeText(getApplicationContext(), "enter valide weight", Toast.LENGTH_SHORT).show();
                }else{
                    countWeight--;
@@ -85,7 +103,7 @@ public class comSignUpActivity extends AppCompatActivity {
         btn_minLenght.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(et_lenght.getText().toString().equals("0")){
+                if(et_lenght.getText().toString().equals("100")){
                     Toast.makeText(getApplicationContext(), "enter valide Lenght", Toast.LENGTH_SHORT).show();
                 }else{
                     countLenght--;
@@ -146,4 +164,15 @@ public class comSignUpActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance().format(c.getTimeInMillis());
+        et_birthday.setText(currentDateString);
+    }
+
 }

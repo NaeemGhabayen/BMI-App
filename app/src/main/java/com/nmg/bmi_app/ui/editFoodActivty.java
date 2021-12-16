@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
     String userId, cat;
     Intent intent;
     String nameFood ,calary, category, documentId,photo;
+    ProgressDialog progressdialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +140,8 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
     }
 
     private void Uploadetofirebase(Uri image) {
+        progressdialog = ProgressDialog.show(this, "","Please Wait...", true);
+
         final StorageReference reference = firebaseStorage.child("users/" + auth.getUid() + "/profile.jpg");
         reference.putFile(image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -148,7 +152,7 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
                         Glide.with(getApplicationContext()).load(uri).into(imgFood);
                         Log.d("TAG", "onSuccess: " + uri);
                         fireUri = uri.toString();
-
+                        progressdialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Image Uploded", Toast.LENGTH_SHORT).show();
 
                     }

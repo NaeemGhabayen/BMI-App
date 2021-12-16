@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16sp"
             android:hint="userName"
-            android:text="n@n.com"
+            android:text="manal@gmail.com"
             android:inputType="textEmailAddress"
             android:padding="12sp" />
 
