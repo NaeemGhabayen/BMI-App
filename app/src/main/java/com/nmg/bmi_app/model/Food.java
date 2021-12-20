@@ -9,16 +9,26 @@ public class Food {
     String fireUri;
     String category;
     String documentId;
+    int idCat;
     public Food() {
     }
 
-    public Food(String userId, String calary, String name, String fireUri, String category,String documentId) {
+    public Food(String userId, String calary, String name, String fireUri, String category,String documentId,int idCat) {
         this.userId = userId;
         this.calary = calary;
         this.name = name;
         this.fireUri = fireUri;
         this.category = category;
         this.documentId= documentId;
+        this.idCat=idCat;
+    }
+
+    public int getIdCat() {
+        return idCat;
+    }
+
+    public void setIdCat(int idCat) {
+        this.idCat = idCat;
     }
 
     public String getFireUri() {

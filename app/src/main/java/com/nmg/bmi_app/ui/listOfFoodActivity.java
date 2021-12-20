@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +30,7 @@ public class listOfFoodActivity extends AppCompatActivity {
     FoodAdapter adapter;
     List<Food> foods;
     TextView tv_result;
+    String[] mTestArray;
 
     FirebaseAuth auth;
     FirebaseFirestore fStore;
@@ -39,6 +41,7 @@ public class listOfFoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_food);
         rv_foods = findViewById(R.id.rv_foods);
         tv_result = findViewById(R.id.tv_result);
+        mTestArray =   getResources().getStringArray(R.array.planets_array);
         foods = new ArrayList<>();
         auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -61,9 +64,11 @@ public class listOfFoodActivity extends AppCompatActivity {
                                 String nameFood = document.getData().get("name").toString();
                                 String calary = document.getData().get("calary").toString();
                                 String fireUri = document.getData().get("fireUri").toString();
-                                String category = document.getData().get("category").toString();
+                                int cat =Integer.parseInt( document.getData().get("category").toString());
+                                String category =mTestArray[cat];
+                                Toast.makeText(getApplicationContext(), ""+category, Toast.LENGTH_SHORT).show();
                                 String documentId = document.getId();
-                                foods.add(new Food(userId, calary,nameFood,fireUri,category,documentId));
+                                foods.add(new Food(userId, calary,nameFood,fireUri,category,documentId,cat));
                                 Log.e("TAGApoi", "onComplete: " + foods.size());
                             }
                             Log.e("TAGApoi", "onComplete: " + foods.size());
@@ -80,6 +85,7 @@ public class listOfFoodActivity extends AppCompatActivity {
                                     i.putExtra("photo",result.getFireUri());
                                     i.putExtra("documentId",result.getDocumentId());
                                     i.putExtra("category",result.getCategory());
+                                    i.putExtra("idCat",result.getIdCat());
                                     startActivity(i);
                                 }
                             });

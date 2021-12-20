@@ -47,6 +47,7 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
     Food food;
     String userId, cat;
     ProgressDialog progressdialog;
+    int selected_spinner =-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,19 +129,24 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
                     Toast.makeText(getApplicationContext(), "please upload photo", Toast.LENGTH_LONG).show();
                     return;
                 }
+                if(selected_spinner==-1){
+                    Toast.makeText(getApplicationContext(), "please change category", Toast.LENGTH_SHORT).show();
+                }
                 food = new Food();
 
                 food.setUserId(userId);
-                food.setCategory(cat);
+                food.setCategory(selected_spinner+"");
                 food.setFireUri(fireUri + "");
                 food.setCalary(et_calary.getText().toString());
                 food.setName(et_nameFood.getText().toString());
+
                 fStore.collection("Food").add(food).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
                             et_calary.setText("");
+                            sp_category.setSelection(0);
                             et_nameFood.setText("");
                             Glide.with(getApplicationContext()).load(R.drawable.ic_launcher_background).into(imgFood);
                         }
@@ -160,6 +166,7 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         cat = adapterView.getItemAtPosition(i).toString();
+        selected_spinner= adapterView.getSelectedItemPosition();
     }
 
     @Override

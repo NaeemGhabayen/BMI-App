@@ -30,6 +30,7 @@ import com.nmg.bmi_app.service.DatePickerFragment;
 import com.nmg.bmi_app.service.TimePickerFragment;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -171,8 +172,9 @@ public class comSignUpActivity extends AppCompatActivity implements DatePickerDi
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance().format(c.getTimeInMillis());
-        et_birthday.setText(currentDateString);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String currentDate = sdf.format(c.getTime());
+        et_birthday.setText(currentDate);
     }
 
 }

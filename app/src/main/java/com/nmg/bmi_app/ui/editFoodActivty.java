@@ -52,6 +52,7 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
     Intent intent;
     String nameFood ,calary, category, documentId,photo;
     ProgressDialog progressdialog;
+    int idCat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +73,7 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
         cat = intent.getStringExtra("category");
         documentId = intent.getStringExtra("documentId");
         fireUri = intent.getStringExtra("photo");
-        Toast.makeText(getApplicationContext(), documentId, Toast.LENGTH_SHORT).show();
+        idCat = intent.getIntExtra("idCat",0);
 
         et_nameFood.setText(nameFood);
         et_calary.setText(calary);
@@ -83,6 +84,9 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
                 R.array.planets_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_category.setAdapter(adapter);
+        sp_category.setSelection(idCat);
+
+        Toast.makeText(getApplicationContext(), ""+idCat, Toast.LENGTH_SHORT).show();
         sp_category.setOnItemSelectedListener(this);
         firebaseStorage = FirebaseStorage.getInstance().getReference();
 
@@ -110,7 +114,7 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
                 map.put("calary",et_calary.getText().toString());
                 map.put("fireUri",fireUri.toString());
                 map.put("name",et_nameFood.getText().toString());
-                map.put("category",cat.toString());
+                map.put("category",idCat);
                 DocumentReference reference1 = fStore.collection("Food").document(documentId);
 
                 reference1.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -170,6 +174,7 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         cat = adapterView.getItemAtPosition(i).toString();
+        idCat= adapterView.getSelectedItemPosition();
     }
 
     @Override
