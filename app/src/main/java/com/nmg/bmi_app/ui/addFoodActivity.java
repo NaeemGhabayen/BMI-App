@@ -36,7 +36,7 @@ import com.nmg.bmi_app.R;
 import com.nmg.bmi_app.model.Food;
 
 public class addFoodActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    EditText et_nameFood, et_calary;
+    EditText et_nameFood, et_clary;
     Spinner sp_category;
     ImageView imgFood;
     Button btn_uploadPhoto, btn_save1;
@@ -53,7 +53,7 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
         et_nameFood = findViewById(R.id.et_nameFood);
-        et_calary = findViewById(R.id.et_calary);
+        et_clary = findViewById(R.id.et_calary);
         sp_category = findViewById(R.id.sp_category);
         imgFood = findViewById(R.id.imgFood);
         btn_save1 = findViewById(R.id.btn_save1);
@@ -121,8 +121,8 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
                     et_nameFood.setError("name is required");
                     return;
                 }
-                if (TextUtils.isEmpty(et_calary.getText().toString())) {
-                    et_calary.setError("calary is required");
+                if (TextUtils.isEmpty(et_clary.getText().toString())) {
+                    et_clary.setError("calary is required");
                     return;
                 }
                 if (fireUri == null) {
@@ -137,7 +137,7 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
                 food.setUserId(userId);
                 food.setCategory(selected_spinner+"");
                 food.setFireUri(fireUri + "");
-                food.setCalary(et_calary.getText().toString());
+                food.setCalary(et_clary.getText().toString());
                 food.setName(et_nameFood.getText().toString());
 
                 fStore.collection("Food").add(food).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -145,7 +145,7 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
-                            et_calary.setText("");
+                            et_clary.setText("");
                             sp_category.setSelection(0);
                             et_nameFood.setText("");
                             Glide.with(getApplicationContext()).load(R.drawable.ic_launcher_background).into(imgFood);
