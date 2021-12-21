@@ -41,7 +41,7 @@ public class listOfFoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_food);
         rv_foods = findViewById(R.id.rv_foods);
         tv_result = findViewById(R.id.tv_result);
-        mTestArray =   getResources().getStringArray(R.array.planets_array);
+        mTestArray =   getResources().getStringArray(R.array.food_category);
         foods = new ArrayList<>();
         auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();

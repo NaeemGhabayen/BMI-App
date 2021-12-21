@@ -58,7 +58,7 @@ public class comSignUpActivity extends AppCompatActivity implements DatePickerDi
         et_birthday = findViewById(R.id.et_birthday);
         et_lenght = findViewById(R.id.et_lenght);
         et_weight = findViewById(R.id.et_weight);
-        radioGroup = findViewById(R.id.radioGroup);
+        radioGroup = findViewById(R.id.rb_gender);
         firestore = FirebaseFirestore.getInstance();
         intent = getIntent();
         userId = intent.getStringExtra("userId");
@@ -100,6 +100,7 @@ public class comSignUpActivity extends AppCompatActivity implements DatePickerDi
 
             }
         });
+        rb_gender =(RadioButton)radioGroup.findViewById(R.id.rb_male);
 
         btn_minLenght.setOnClickListener(new View.OnClickListener() {
             @Override

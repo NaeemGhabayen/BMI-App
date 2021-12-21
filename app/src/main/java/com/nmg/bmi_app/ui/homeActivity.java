@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,15 @@ public class homeActivity extends AppCompatActivity {
     Calendar today;
     int age, year;
     String userWeight, userLenght,birthday;
+
+    boolean isloding= true;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getDataFromFirebase();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +75,8 @@ public class homeActivity extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         userId = auth.getUid();
         today = Calendar.getInstance();
+        getDataFromFirebase();
 
-        showData();
         btn_viewFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,8 +109,14 @@ public class homeActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), newRecordActivity.class));
             }
         });
-
-        getDataFromFirebase();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+               showData();
+            }
+        }, 1000);
     }
 
 
@@ -283,6 +299,10 @@ public class homeActivity extends AppCompatActivity {
     }
 
     private void setDataForStutes(String birthday, String userWeight, String userLenght, String gender) {
+        Log.d("TAssG", "setDataForStutes: "+birthday);
+        if(birthday ==null){
+            birthday="31-12-2021";
+        }
         year = Integer.parseInt(birthday.substring(7));
         age = today.get(Calendar.YEAR) -year ;
         weight = Double.parseDouble(userWeight);
@@ -333,7 +353,7 @@ public class homeActivity extends AppCompatActivity {
                             userWeight= task.getResult().get("weight").toString();
                             userLenght= task.getResult().get("lenght").toString();
                             birthday= task.getResult().get("birthday").toString();
-
+                            Log.d("TAG", "onComplete: "+birthday);
                             tv_name.setText(name);
                         }
                     }
