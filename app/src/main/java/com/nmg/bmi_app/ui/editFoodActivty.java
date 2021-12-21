@@ -81,7 +81,7 @@ public class editFoodActivty extends AppCompatActivity implements AdapterView.On
         Glide.with(getApplicationContext()).load(fireUri).into(imgFood);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+                R.array.food_category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_category.setAdapter(adapter);
         sp_category.setSelection(idCat);

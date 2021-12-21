@@ -62,7 +62,7 @@ public class addFoodActivity extends AppCompatActivity implements AdapterView.On
         auth = FirebaseAuth.getInstance();
         userId = auth.getUid();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+                R.array.food_category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_category.setAdapter(adapter);
         sp_category.setOnItemSelectedListener(this);
